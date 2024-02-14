@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Home</title>
+  <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+
+<body>
+  <div id="headerContainer">
+    <div class="header" style="width:200px;">
+        <h2>
+            <a href="index.html" id="noStyle">
+                Guitar Inventory Management
+            </a>
+        </h2>
+    </div>
+    <div class="header" float="right">
+      <span href="search.html">Search</span>
+      <a href="add.html">Add</a>
+      <a href="about.html">About</a>
+    </div>
+  </div>
+  <div id="inputContainer">
+    <label>Serial number:</label> 
+    <input type="number" id="serialNumber" name="serialNumber"/><br><br>
+    <label>Price:</label>
+    <input type="number" id="price" name="price"/><br><br>
+    <label>Builder:</label>
+    <select id="builder">
+        <option value=""></option>
+      <option value="Fender">Fender</option>
+      <option value="Martin">Martin</option>
+      <option value="Gibson">Gibson</option>
+      <option value="Collings">Collings</option>
+      <option value="Olson">Olson</option>
+      <option value="Ryan">Ryan</option>
+      <option value="PRS">PRS</option>
+      <option value="Other">Other</option>
+    </select><br><br>
+    <label>Model:</label>
+    <input type="text" id="model" name="model"/><br><br>
+    <label>Type:</label>
+      <select id="type">
+          <option value=""></option>
+          <option value="Acoustic">Acoustic</option>
+          <option value="Electric">Electric</option>
+      </select><br><br>
+      <label>Back Wood:</label>
+      <select id="backWood">
+        <option value=""></option>
+          <option value="Indian_Rosewood">Indian Rosewood</option>
+          <option value="Brazilian_Rosewood">Brazilian Rosewood</option>
+          <option value="Mahogany">Mahogany</option>
+          <option value="Maple">Maple</option>
+          <option value="Cocobolo">Cocobolo</option>
+          <option value="Cedar">Cedar</option>
+          <option value="Adirondack">Adirondack</option>
+          <option value="Alder">Alder</option>
+          <option value="Sitka">Sitka</option>
+          <option value="Other">Other</option>
+      </select><br><br>
+      <label>Top Wood:</label>
+      <select id="topWood">
+          <option value=""></option>
+          <option value="Indian_Rosewood">Indian Rosewood</option>
+          <option value="Brazilian_Rosewood">Brazilian Rosewood</option>
+          <option value="Mahogany">Mahogany</option>
+          <option value="Maple">Maple</option>
+          <option value="Cocobolo">Cocobolo</option>
+          <option value="Cedar">Cedar</option>
+          <option value="Adirondack">Adirondack</option>
+          <option value="Alder">Alder</option>
+          <option value="Sitka">Sitka</option>
+          <option value="Other">Other</option>
+      </select>
+          <label style="border: 0;margin: none;">
+              <button type="submit" id="submit" onclick="search()">Submit</button>
+          </label>
+    </div>
+    <table id="guitarTable">
+        <thead>
+        <tr>
+            <th>Serial Number</th>
+            <th>Price</th>
+            <th>Builder</th>
+            <th>Model</th>
+            <th>Type</th>
+            <th>Back Wood</th>
+            <th>Top Wood</th>
+        </tr>
+        </thead>
+        <tbody id="guitarTableBody">
+        </tbody>
+    </table>
+    <script>
+        let guitars = [{
+            serialNumber: "1234",
+            price: 1000,
+            builder: "Fender",
+            model: "Stratocaster",
+            type: "Electric",
+            backWood: "Maple",
+            topWood: "Maple"
+        }, {
+            serialNumber: "5678",
+            price: 1500,
+            builder: "Gibson",
+            model: "Les Paul",
+            type: "Electric",
+            backWood: "Mahogany",
+            topWood: "Mahogany"
+        }, {
+            serialNumber: "91011",
+            price: 2000,
+            builder: "Martin",
+            model: "D-18",
+            type: "Acoustic",
+            backWood: "Mahogany",
+            topWood: "Adirondack"
+        }, 
+        {
+            serialNumber: "121314",
+            price: 2500.00,
+            builder: "Martin",
+            model: "D-2H",
+            type: "Acoustic",
+            backWood: "Mahogany",
+            topWood: "Adirondack"
+        },
+        {
+            serialNumber: "151617",
+            price: 3000.00,
+            builder: "Martin",
+            model: "D-28",
+            type: "Acoustic",
+            backWood: "Rosewood",
+            topWood: "Adirondack"
+        },
+        {
+            serialNumber: "181920",
+            price: 3500.00,
+            builder: "Martin",
+            model: "D-45",
+            type: "Acoustic",
+            backWood: "Rosewood",
+            topWood: "Adirondack"
+        },
+        {
+            serialNumber: "212223",
+            price: 4000.00,
+            builder: "Martin",
+            model: "D-35",
+            type: "Acoustic",
+            backWood: "Rosewood",
+            topWood: "Adirondack"
+        },
+        {
+            serialNumber: "242526",
+            price: 4500.00,
+            builder: "Martin",
+            model: "D-42",
+            type: "Acoustic",
+            backWood: "Rosewood",
+            topWood: "Adirondack"
+        },
+        {
+            serialNumber: "272829",
+            price: 5000.00,
+            builder: "Martin",
+            model: "D-41",
+            type: "Acoustic",
+            backWood: "Rosewood",
+            topWood: "Adirondack"
+        },
+        {
+            serialNumber: "303132",
+            price: 5500.00,
+            builder: "Martin",
+            model: "D-40",
+            type: "Acoustic",
+            backWood: "Rosewood",
+            topWood: "Adirondack"
+        },
+        {
+            serialNumber: "333435",
+            price: 6000.00,
+            builder: "Martin",
+            model: "D-16",
+            type: "Acoustic",
+            backWood: "Mahogany",
+            topWood: "Adirondack"
+        },
+        {
+            serialNumber: "363738",
+            price: 6500.00,
+            builder: "Martin",
+            model: "D-15",
+            type: "Acoustic",
+            backWood: "Mahogany",
+            topWood: "Adirondack"
+        },
+    ];
+        search = () => {
+            let serialNumber = document.getElementById("serialNumber").value;
+            let price = document.getElementById("price").value;
+            let builder = document.getElementById("builder").value;
+            let model = document.getElementById("model").value;
+            let type = document.getElementById("type").value;
+            let backWood = document.getElementById("backWood").value;
+            let topWood = document.getElementById("topWood").value;
+            let guitar = {
+                serialNumber: serialNumber,
+                price: price,
+                builder: builder,
+                model: model,
+                type: type,
+                backWood: backWood,
+                topWood: topWood
+            };
+            let filteredGuitars = guitars.filter(guitar => {
+                console.log(price, guitar.price)
+                return (serialNumber === "" || guitar.serialNumber === serialNumber) &&
+                    (price === "" || parseFloat(guitar.price) === parseFloat(price)) &&
+                    (builder === "" || guitar.builder === builder) &&
+                    (model === "" || guitar.model === model) &&
+                    (type === "" || guitar.type === type) &&
+                    (backWood === "" || guitar.backWood === backWood) &&
+                    (topWood === "" || guitar.topWood === topWood);
+            });
+            let guitarTable = document.getElementById("guitarTable");
+            let guitarTableBody = document.getElementById("guitarTableBody");
+            guitarTableBody.innerHTML = "";
+            filteredGuitars.forEach(guitar => {
+                let row = guitarTableBody.insertRow();
+                let serialNumberCell = row.insertCell(0);
+                let priceCell = row.insertCell(1);
+                let builderCell = row.insertCell(2);
+                let modelCell = row.insertCell(3);
+                let typeCell = row.insertCell(4);
+                let backWoodCell = row.insertCell(5);
+                let topWoodCell = row.insertCell(6);
+                serialNumberCell.innerHTML = guitar.serialNumber;
+                priceCell.innerHTML = guitar.price;
+                builderCell.innerHTML = guitar.builder;
+                modelCell.innerHTML = guitar.model;
+                typeCell.innerHTML = guitar.type;
+                backWoodCell.innerHTML = guitar.backWood;
+                topWoodCell.innerHTML = guitar.topWood;
+                console.log(guitar);
+            });
+
+        
+        }
+    </script>
+</body>
+
+</html>

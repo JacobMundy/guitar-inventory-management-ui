@@ -15,8 +15,9 @@ table {
 }
 
 #noStyle {
-    all:unset;
+    all: unset;
 }
+
 #noStyle:hover {
     cursor: pointer;
     color: #FF0000;
@@ -41,8 +42,9 @@ table {
     padding: 0;
     display: inline;
     overflow-wrap: break-word;
-    color:#CE6D46;
+    color: #CE6D46;
 }
+
 .header span {
     display: inline;
     float: right;
@@ -53,6 +55,7 @@ table {
     text-decoration: none;
     color: #000000;
 }
+
 .header a {
     display: inline;
     float: right;
@@ -69,7 +72,7 @@ table {
     color: #FF0000;
 }
 
-.header span{
+.header span {
     color: #CE6D46;
 }
 
@@ -80,12 +83,13 @@ table {
 }
 
 #inputContainer {
-    display:block;
+    display: block;
     justify-content: space-between;
     align-items: center;
     width: 35%;
     margin: auto;
 }
+
 #inputContainer label {
     margin: 10px;
     padding: 10px;
@@ -95,6 +99,7 @@ table {
     float: left;
     clear: left;
 }
+
 #inputContainer input {
     margin: 10px;
     padding: 10px;
@@ -156,5 +161,4 @@ table {
     font-size: 20px;
     color: #000000;
     font-weight: bold;
-    
 }

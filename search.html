@@ -2,93 +2,93 @@
 <html>
 
 <head>
-  <title>Home</title>
-  <link rel="stylesheet" type="text/css" href="style.css">
+    <title>Search</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
 </head>
 
 <body>
-  <div id="headerContainer">
-    <div class="header" style="width:200px;">
-        <h2>
-            <a href="index.html" id="noStyle">
-                Guitar Inventory Management
-            </a>
-        </h2>
+    <div id="headerContainer">
+        <div class="header" style="width:200px;">
+            <h2>
+                <a href="index.html" id="noStyle">
+                    Guitar Inventory Management
+                </a>
+            </h2>
+        </div>
+        <div class="header" float="right">
+            <span href="search.html">Search</span>
+            <a href="add.html">Add</a>
+            <a href="about.html">About</a>
+        </div>
     </div>
-    <div class="header" float="right">
-      <span href="search.html">Search</span>
-      <a href="add.html">Add</a>
-      <a href="about.html">About</a>
-    </div>
-  </div>
-  <div id="inputContainer">
-    <label>Serial number:</label> 
-    <input type="number" id="serialNumber" name="serialNumber"/><br><br>
-    <label>Price:</label>
-    <input type="number" id="price" name="price"/><br><br>
-    <label>Builder:</label>
-    <select id="builder">
-        <option value=""></option>
-      <option value="Fender">Fender</option>
-      <option value="Martin">Martin</option>
-      <option value="Gibson">Gibson</option>
-      <option value="Collings">Collings</option>
-      <option value="Olson">Olson</option>
-      <option value="Ryan">Ryan</option>
-      <option value="PRS">PRS</option>
-      <option value="Other">Other</option>
-    </select><br><br>
-    <label>Model:</label>
-    <input type="text" id="model" name="model"/><br><br>
-    <label>Type:</label>
-      <select id="type">
-          <option value=""></option>
-          <option value="Acoustic">Acoustic</option>
-          <option value="Electric">Electric</option>
-      </select><br><br>
-      <label>Back Wood:</label>
-      <select id="backWood">
-        <option value=""></option>
-          <option value="Indian_Rosewood">Indian Rosewood</option>
-          <option value="Brazilian_Rosewood">Brazilian Rosewood</option>
-          <option value="Mahogany">Mahogany</option>
-          <option value="Maple">Maple</option>
-          <option value="Cocobolo">Cocobolo</option>
-          <option value="Cedar">Cedar</option>
-          <option value="Adirondack">Adirondack</option>
-          <option value="Alder">Alder</option>
-          <option value="Sitka">Sitka</option>
-          <option value="Other">Other</option>
-      </select><br><br>
-      <label>Top Wood:</label>
-      <select id="topWood">
-          <option value=""></option>
-          <option value="Indian_Rosewood">Indian Rosewood</option>
-          <option value="Brazilian_Rosewood">Brazilian Rosewood</option>
-          <option value="Mahogany">Mahogany</option>
-          <option value="Maple">Maple</option>
-          <option value="Cocobolo">Cocobolo</option>
-          <option value="Cedar">Cedar</option>
-          <option value="Adirondack">Adirondack</option>
-          <option value="Alder">Alder</option>
-          <option value="Sitka">Sitka</option>
-          <option value="Other">Other</option>
-      </select>
-          <label style="border: 0;margin: none;">
-              <button type="submit" id="submit" onclick="search()">Submit</button>
-          </label>
+    <div id="inputContainer">
+        <label>Serial number:</label>
+        <input type="number" id="serialNumber" name="serialNumber" /><br><br>
+        <label>Price:</label>
+        <input type="number" id="price" name="price" /><br><br>
+        <label>Builder:</label>
+        <select id="builder">
+            <option value=""></option>
+            <option value="Fender">Fender</option>
+            <option value="Martin">Martin</option>
+            <option value="Gibson">Gibson</option>
+            <option value="Collings">Collings</option>
+            <option value="Olson">Olson</option>
+            <option value="Ryan">Ryan</option>
+            <option value="PRS">PRS</option>
+            <option value="Other">Other</option>
+        </select><br><br>
+        <label>Model:</label>
+        <input type="text" id="model" name="model" /><br><br>
+        <label>Type:</label>
+        <select id="type">
+            <option value=""></option>
+            <option value="Acoustic">Acoustic</option>
+            <option value="Electric">Electric</option>
+        </select><br><br>
+        <label>Back Wood:</label>
+        <select id="backWood">
+            <option value=""></option>
+            <option value="Indian_Rosewood">Indian Rosewood</option>
+            <option value="Brazilian_Rosewood">Brazilian Rosewood</option>
+            <option value="Mahogany">Mahogany</option>
+            <option value="Maple">Maple</option>
+            <option value="Cocobolo">Cocobolo</option>
+            <option value="Cedar">Cedar</option>
+            <option value="Adirondack">Adirondack</option>
+            <option value="Alder">Alder</option>
+            <option value="Sitka">Sitka</option>
+            <option value="Other">Other</option>
+        </select><br><br>
+        <label>Top Wood:</label>
+        <select id="topWood">
+            <option value=""></option>
+            <option value="Indian_Rosewood">Indian Rosewood</option>
+            <option value="Brazilian_Rosewood">Brazilian Rosewood</option>
+            <option value="Mahogany">Mahogany</option>
+            <option value="Maple">Maple</option>
+            <option value="Cocobolo">Cocobolo</option>
+            <option value="Cedar">Cedar</option>
+            <option value="Adirondack">Adirondack</option>
+            <option value="Alder">Alder</option>
+            <option value="Sitka">Sitka</option>
+            <option value="Other">Other</option>
+        </select>
+        <label style="border: 0;margin: none;">
+            <button type="submit" id="submit" onclick="search()">Submit</button>
+        </label>
     </div>
     <table id="guitarTable">
         <thead>
-        <tr>
-            <th>Serial Number</th>
-            <th>Price</th>
-            <th>Builder</th>
-            <th>Model</th>
-            <th>Type</th>
-            <th>Back Wood</th>
-            <th>Top Wood</th>
-        </tr>
+            <tr>
+                <th>Serial Number</th>
+                <th>Price</th>
+                <th>Builder</th>
+                <th>Model</th>
+                <th>Type</th>
+                <th>Back Wood</th>
+                <th>Top Wood</th>
+            </tr>
         </thead>
         <tbody id="guitarTableBody">
         </tbody>
@@ -118,7 +118,7 @@
             type: "Acoustic",
             backWood: "Mahogany",
             topWood: "Adirondack"
-        }, 
+        },
         {
             serialNumber: "121314",
             price: 2500.00,
@@ -200,7 +200,7 @@
             backWood: "Mahogany",
             topWood: "Adirondack"
         },
-    ];
+        ];
         search = () => {
             let serialNumber = document.getElementById("serialNumber").value;
             let price = document.getElementById("price").value;
@@ -250,7 +250,7 @@
                 console.log(guitar);
             });
 
-        
+
         }
     </script>
 </body>

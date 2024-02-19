@@ -94,114 +94,8 @@
         </tbody>
     </table>
     <script>
-        let guitars = [{
-            serialNumber: "1234",
-            price: 1000,
-            builder: "Fender",
-            model: "Stratocaster",
-            type: "Electric",
-            backWood: "Maple",
-            topWood: "Maple"
-        }, {
-            serialNumber: "5678",
-            price: 1500,
-            builder: "Gibson",
-            model: "Les Paul",
-            type: "Electric",
-            backWood: "Mahogany",
-            topWood: "Mahogany"
-        }, {
-            serialNumber: "91011",
-            price: 2000,
-            builder: "Martin",
-            model: "D-18",
-            type: "Acoustic",
-            backWood: "Mahogany",
-            topWood: "Adirondack"
-        },
-        {
-            serialNumber: "121314",
-            price: 2500.00,
-            builder: "Martin",
-            model: "D-2H",
-            type: "Acoustic",
-            backWood: "Mahogany",
-            topWood: "Adirondack"
-        },
-        {
-            serialNumber: "151617",
-            price: 3000.00,
-            builder: "Martin",
-            model: "D-28",
-            type: "Acoustic",
-            backWood: "Rosewood",
-            topWood: "Adirondack"
-        },
-        {
-            serialNumber: "181920",
-            price: 3500.00,
-            builder: "Martin",
-            model: "D-45",
-            type: "Acoustic",
-            backWood: "Rosewood",
-            topWood: "Adirondack"
-        },
-        {
-            serialNumber: "212223",
-            price: 4000.00,
-            builder: "Martin",
-            model: "D-35",
-            type: "Acoustic",
-            backWood: "Rosewood",
-            topWood: "Adirondack"
-        },
-        {
-            serialNumber: "242526",
-            price: 4500.00,
-            builder: "Martin",
-            model: "D-42",
-            type: "Acoustic",
-            backWood: "Rosewood",
-            topWood: "Adirondack"
-        },
-        {
-            serialNumber: "272829",
-            price: 5000.00,
-            builder: "Martin",
-            model: "D-41",
-            type: "Acoustic",
-            backWood: "Rosewood",
-            topWood: "Adirondack"
-        },
-        {
-            serialNumber: "303132",
-            price: 5500.00,
-            builder: "Martin",
-            model: "D-40",
-            type: "Acoustic",
-            backWood: "Rosewood",
-            topWood: "Adirondack"
-        },
-        {
-            serialNumber: "333435",
-            price: 6000.00,
-            builder: "Martin",
-            model: "D-16",
-            type: "Acoustic",
-            backWood: "Mahogany",
-            topWood: "Adirondack"
-        },
-        {
-            serialNumber: "363738",
-            price: 6500.00,
-            builder: "Martin",
-            model: "D-15",
-            type: "Acoustic",
-            backWood: "Mahogany",
-            topWood: "Adirondack"
-        },
-        ];
-        search = () => {
+        let guitars = [];
+        async function search() {
             let serialNumber = document.getElementById("serialNumber").value;
             let price = document.getElementById("price").value;
             let builder = document.getElementById("builder").value;
@@ -209,6 +103,7 @@
             let type = document.getElementById("type").value;
             let backWood = document.getElementById("backWood").value;
             let topWood = document.getElementById("topWood").value;
+            if (price === "") price = 0.0;
             let guitar = {
                 serialNumber: serialNumber,
                 price: price,
@@ -218,15 +113,26 @@
                 backWood: backWood,
                 topWood: topWood
             };
+            let request = {
+                method: "GET",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+            };
+            let host = "http://localhost:8080";
+            host = "http://localhost:8080/search?serialNumber=" + serialNumber + "&price=" + price 
+            + "&builder=" + builder + "&model=" + model + "&type=" + type + "&backWood=" + backWood + "&topWood=" + topWood;
+            let response = await fetch(host, request);
+            let data = await response.json();
+            guitars = data;
             let filteredGuitars = guitars.filter(guitar => {
-                console.log(price, guitar.price)
                 return (serialNumber === "" || guitar.serialNumber === serialNumber) &&
-                    (price === "" || parseFloat(guitar.price) === parseFloat(price)) &&
-                    (builder === "" || guitar.builder === builder) &&
-                    (model === "" || guitar.model === model) &&
-                    (type === "" || guitar.type === type) &&
-                    (backWood === "" || guitar.backWood === backWood) &&
-                    (topWood === "" || guitar.topWood === topWood);
+                    (price === 0 || parseFloat(guitar.price) === parseFloat(price)) &&
+                    (builder === "" || guitar.builder.toUpperCase() === builder.toUpperCase()) &&
+                    (model === "" || guitar.model.toUpperCase() === model.toUpperCase()) &&
+                    (type === "" || guitar.type.toUpperCase() === type.toUpperCase()) &&
+                    (backWood === "" || guitar.backWood.toUpperCase() === backWood.toUpperCase()) &&
+                    (topWood === "" || guitar.topWood.toUpperCase() === topWood.toUpperCase());
             });
             let guitarTable = document.getElementById("guitarTable");
             let guitarTableBody = document.getElementById("guitarTableBody");
@@ -249,7 +155,6 @@
                 topWoodCell.innerHTML = guitar.topWood;
                 console.log(guitar);
             });
-
 
         }
     </script>

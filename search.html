@@ -119,12 +119,13 @@
                     "Content-Type": "application/json"
                 },
             };
-            let host = "http://localhost:8080";
-            host = "http://localhost:8080/search?serialNumber=" + serialNumber + "&price=" + price 
+            let host = "https://jacobmundy-guitar-inventory-management.onrender.com";
+            host = "https://jacobmundy-guitar-inventory-management.onrender.com/search?serialNumber=" + serialNumber + "&price=" + price 
             + "&builder=" + builder + "&model=" + model + "&type=" + type + "&backWood=" + backWood + "&topWood=" + topWood;
             let response = await fetch(host, request);
             let data = await response.json();
             guitars = data;
+            console.log(guitars);
             let filteredGuitars = guitars.filter(guitar => {
                 return (serialNumber === "" || guitar.serialNumber === serialNumber) &&
                     (price === 0 || parseFloat(guitar.price) === parseFloat(price)) &&

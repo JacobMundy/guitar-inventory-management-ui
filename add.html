@@ -28,47 +28,47 @@
     <input type="number" id="price" name="price" /><br><br>
     <label>Builder:</label>
     <select id="builder">
-      <option value="Fender">Fender</option>
-      <option value="Martin">Martin</option>
-      <option value="Gibson">Gibson</option>
-      <option value="Collings">Collings</option>
-      <option value="Olson">Olson</option>
-      <option value="Ryan">Ryan</option>
+      <option value="FENDER">Fender</option>
+      <option value="MARTIN">Martin</option>
+      <option value="GIBSON">Gibson</option>
+      <option value="COLLINGS">Collings</option>
+      <option value="OLSON">Olson</option>
+      <option value="RYAN">Ryan</option>
       <option value="PRS">PRS</option>
-      <option value="Other">Other</option>
+      <!-- <option value="Other">Other</option> -->
     </select><br><br>
     <label>Model:</label>
     <input type="text" id="model" name="model" /><br><br>
     <label>Type:</label>
     <select id="type">
-      <option value="Acoustic">Acoustic</option>
-      <option value="Electric">Electric</option>
+      <option value="ACOUSTIC">Acoustic</option>
+      <option value="ELECTRIC">Electric</option>
     </select><br><br>
     <label>Back Wood:</label>
     <select id="backWood">
-      <option value="Indian_Rosewood">Indian Rosewood</option>
-      <option value="Brazilian_Rosewood">Brazilian Rosewood</option>
-      <option value="Mahogany">Mahogany</option>
-      <option value="Maple">Maple</option>
-      <option value="Cocobolo">Cocobolo</option>
-      <option value="Cedar">Cedar</option>
-      <option value="Adirondack">Adirondack</option>
-      <option value="Alder">Alder</option>
-      <option value="Sitka">Sitka</option>
-      <option value="Other">Other</option>
+      <option value="INDIAN_ROSEWOOD">Indian Rosewood</option>
+      <option value="BRAZILIAN_ROSEWOOD">Brazilian Rosewood</option>
+      <option value="MAHOGANY">Mahogany</option>
+      <option value="MAPLE">Maple</option>
+      <option value="COCOBOLO">Cocobolo</option>
+      <option value="CEDAR">Cedar</option>
+      <option value="ADIRONDACK">Adirondack</option>
+      <option value="ALDER">Alder</option>
+      <option value="SITKA">Sitka</option>
+      <!-- <option value="Other">Other</option> -->
     </select><br><br>
     <label>Top Wood:</label>
     <select id="topWood">
-      <option value="Indian_Rosewood">Indian Rosewood</option>
-      <option value="Brazilian_Rosewood">Brazilian Rosewood</option>
-      <option value="Mahogany">Mahogany</option>
-      <option value="Maple">Maple</option>
-      <option value="Cocobolo">Cocobolo</option>
-      <option value="Cedar">Cedar</option>
-      <option value="Adirondack">Adirondack</option>
-      <option value="Alder">Alder</option>
-      <option value="Sitka">Sitka</option>
-      <option value="Other">Other</option>
+      <option value="INDIAN_ROSEWOOD">Indian Rosewood</option>
+      <option value="BRAZILIAN_ROSEWOOD">Brazilian Rosewood</option>
+      <option value="MAHOGANY">Mahogany</option>
+      <option value="MAPLE">Maple</option>
+      <option value="COCOBOLO">Cocobolo</option>
+      <option value="CEDAR">Cedar</option>
+      <option value="ADIRONDACK">Adirondack</option>
+      <option value="ALDER">Alder</option>
+      <option value="SITKA">Sitka</option>
+      <!-- <option value="Other">Other</option> -->
     </select>
     <label style="border: 0;margin: none;">
       <button type="submit" id="submit" onclick="addGuitar()">Submit</button>
@@ -83,6 +83,10 @@
       let type = document.getElementById("type").value;
       let backWood = document.getElementById("backWood").value;
       let topWood = document.getElementById("topWood").value;
+      if (serialNumber === "" || price === "" || builder === "" || model === "" || type === "" || backWood === "" || topWood === "") {
+        alert("Please fill in all fields");
+        return;
+      }
       let guitar = {
         serialNumber: serialNumber,
         price: price,
@@ -92,21 +96,23 @@
         backWood: backWood,
         topWood: topWood
       };
-
-      alert("Guitar " + JSON.stringify(guitar) + " added!");
-      // let host = "http://localhost:8080";
-      // let request = {
-      //     method: "POST",
-      //     headers: {
-      //         "Content-Type": "application/json"
-      //     },
-      //     body: JSON.stringify(guitar)
-      // };
-      // console.log(request);
-      // fetch(host + "/guitars", request)
-      //     .then(response => response.json())
-      //     .then(data => console.log(data))
-      //     .catch(error => console.log(error));
+      let host = "https://jacobmundy-guitar-inventory-management.onrender.com";
+      let request = {
+          method: "POST",
+          headers: {
+              "Content-Type": "application/json"
+          },
+          body: JSON.stringify(guitar)
+      };
+      // Sending an already existing guitar *isnt* an error
+      fetch(host + "/add", request)
+        .then(response => {
+          if (response.status === 200) {
+            alert("The guitar was added to the system");
+          } else {
+            alert("Something went wrong. Please try again or contact the customer support team.");
+          }})
+        .catch(error => console.log(error));
     }
   </script>
 </body>
